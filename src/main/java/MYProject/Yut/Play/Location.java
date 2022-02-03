@@ -9,6 +9,10 @@ public class Location {
         this.y = y;
     }
 
+    public Location(){
+
+    }
+
     public int getX() {
         return x;
     }

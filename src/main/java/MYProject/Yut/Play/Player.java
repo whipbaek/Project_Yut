@@ -1,7 +1,7 @@
 package MYProject.Yut.Play;
 
 public class Player {
-    private final Mal mal;
+    private Mal mal;
 
     public Player(Mal mal) { //말을 셋팅한다.
         this.mal = mal;
@@ -11,4 +11,7 @@ public class Player {
         return mal;
     }
 
+    public void setMal(Mal mal) {
+        this.mal = mal;
+    }
 }
