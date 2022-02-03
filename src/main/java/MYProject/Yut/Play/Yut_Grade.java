@@ -5,7 +5,7 @@ public enum Yut_Grade {
 
     private final int value;
 
-    private Yut_Grade(int value) {
+    Yut_Grade(int value) {
         this.value = value;
     }
 

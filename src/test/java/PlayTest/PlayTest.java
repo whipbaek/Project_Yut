@@ -47,6 +47,8 @@ public class PlayTest {
 
         System.out.println("변경 값 : ["+ mal.getLocation().getX() + "," + mal.getLocation().getY() + "]");
         System.out.println();
+
+        System.out.println(Yut_Grade.values()[1]);
     }
 }
 
