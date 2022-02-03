@@ -8,11 +8,7 @@ public class Yut {
 //        return Yut_Grade.values()[new Random().nextInt(Yut_Grade.values().length)];
 //    }
 
-    public Yut_Grade getYutValue(){
-        return rollingYut();
-    }
-
-    private Yut_Grade rollingYut(){ //4개의 윷을 던진다. 앞,뒤 각각 50프로 확률
+    public Yut_Grade rollingYut(){ //4개의 윷을 던진다. 앞,뒤 각각 50프로 확률
         int count=0;
         boolean back=false;
         for(int i=0;i<4;i++){

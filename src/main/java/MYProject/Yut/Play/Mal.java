@@ -2,13 +2,13 @@ package MYProject.Yut.Play;
 
 public class Mal {
     private Location location;
+    private Location beforelocatoin;
     private boolean straight;
-    private boolean strat;
+
 
     public Mal(Location location) {
         this.location = location;
         this.straight = true;
-        this.strat = false;
     }
 
     public Location getLocation() {
@@ -19,6 +19,14 @@ public class Mal {
         this.location = location;
     }
 
+    public Location getBeforelocatoin() {
+        return beforelocatoin;
+    }
+
+    public void setBeforelocatoin(Location beforelocatoin) {
+        this.beforelocatoin = beforelocatoin;
+    }
+
     public boolean isStraight() {
         return straight;
     }
@@ -27,11 +35,4 @@ public class Mal {
         this.straight = straight;
     }
 
-    public boolean isStrat() {
-        return strat;
-    }
-
-    public void setStrat(boolean strat) {
-        this.strat = strat;
-    }
 }

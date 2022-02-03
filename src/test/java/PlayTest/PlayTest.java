@@ -89,7 +89,7 @@ public class PlayTest {
     }
 
     @Test
-    public void playTest3(){
+    public void playTest3(){ //모 걸 걸
 
         System.out.println("Test3");
 
@@ -106,6 +106,12 @@ public class PlayTest {
         assertThat(player.getMal().getLocation().getY()).isEqualTo(location.getY());
 
         value = Yut_Grade.걸;
+        player.setMal(board.ChangeMal(player.getMal(), value)); //말과, 윷의 값, 그리고 대각선인지를 확인후 이동한다.
+        location.setX(30); location.setY(30);
+        assertThat(player.getMal().getLocation().getX()).isEqualTo(location.getX());
+        assertThat(player.getMal().getLocation().getY()).isEqualTo(location.getY());
+
+        value = Yut_Grade.도;
         player.setMal(board.ChangeMal(player.getMal(), value)); //말과, 윷의 값, 그리고 대각선인지를 확인후 이동한다.
         location.setX(30); location.setY(30);
         assertThat(player.getMal().getLocation().getX()).isEqualTo(location.getX());
@@ -147,6 +153,44 @@ public class PlayTest {
         location.setX(30); location.setY(30);
         assertThat(player.getMal().getLocation().getX()).isEqualTo(location.getX());
         assertThat(player.getMal().getLocation().getY()).isEqualTo(location.getY());
+
+    }
+
+    @Test
+    public void playTest5(){
+
+        System.out.println("Test5");
+
+        value = Yut_Grade.모;
+        player.setMal(board.ChangeMal(player.getMal(), value)); //말과, 윷의 값, 그리고 대각선인지를 확인후 이동한다.
+        location.setX(0); location.setY(30);
+        assertThat(player.getMal().getLocation().getX()).isEqualTo(location.getX());
+        assertThat(player.getMal().getLocation().getY()).isEqualTo(location.getY());
+
+        value = Yut_Grade.백도;
+        player.setMal(board.ChangeMal(player.getMal(), value)); //말과, 윷의 값, 그리고 대각선인지를 확인후 이동한다.
+        location.setX(6); location.setY(30);
+        assertThat(player.getMal().getLocation().getX()).isEqualTo(location.getX());
+        assertThat(player.getMal().getLocation().getY()).isEqualTo(location.getY());
+        System.out.println("now location : [" + player.getMal().getLocation().getX() +
+                "," + player.getMal().getLocation().getY() + "]");
+
+
+
+    }
+
+    @Test
+    public void playTest6(){
+
+        System.out.println("Test6");
+
+        value = Yut_Grade.백도;
+        player.setMal(board.ChangeMal(player.getMal(), value)); //말과, 윷의 값, 그리고 대각선인지를 확인후 이동한다.
+        location.setX(30); location.setY(30);
+        assertThat(player.getMal().getLocation().getX()).isEqualTo(location.getX());
+        assertThat(player.getMal().getLocation().getY()).isEqualTo(location.getY());
+
+
 
     }
 

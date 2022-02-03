@@ -10,7 +10,7 @@ public class RandomYutTest {
     public void randomYutTest() {
         Yut yut = new Yut();
         for(int i=0; i<5; i++) {
-            Yut_Grade yutValue = yut.getYutValue();
+            Yut_Grade yutValue = yut.rollingYut();
             System.out.println("yutValue = " + yutValue);
         }
     }
