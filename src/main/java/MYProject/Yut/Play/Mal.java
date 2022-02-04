@@ -6,8 +6,8 @@ public class Mal {
     private boolean straight;
 
 
-    public Mal(Location location) {
-        this.location = location;
+    public Mal() {
+        this.location = new Location(30,30);
         this.straight = true;
     }
 

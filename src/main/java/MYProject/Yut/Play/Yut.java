@@ -13,7 +13,6 @@ public class Yut {
         boolean back=false;
         for(int i=0;i<4;i++){
             double temp =  Math.random();
-            System.out.println("temp = " + temp);
             if(temp > 0.5){
                 count++;
                 if(i==3) back=true; //4번째 말에 x표시 되어있음(백도 유무)
