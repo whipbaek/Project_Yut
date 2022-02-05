@@ -68,6 +68,7 @@ public class Board {
                     if(mal.getBeforelocatoin()!=null){
                         if(x==30 && y == 30 && count > 0){
                             System.out.println("도착!");
+                            mal.setArrive(true);
                             mal.setLocation(t_location);
                             return mal;
                         }
@@ -87,7 +88,6 @@ public class Board {
                 y = t_location.getY();
 
                 if(mal.getBeforelocatoin()!=null){
-                    System.out.println("mal.getBeforelocatoin() = " + mal.getBeforelocatoin());
                     if(x==30 && y == 30 && count > 0){
                         System.out.println("도착!");
                         mal.setLocation(t_location);
@@ -134,9 +134,7 @@ public class Board {
             mal.setStraight(false);
         }
 
-
         mal.setLocation(t_location);
-
 
         return mal;
     }

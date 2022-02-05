@@ -11,9 +11,9 @@ public class Player {
         MakeMal();
     }
 
-    private void MakeMal(){ //말을 생성한다.
-        for(int i=0; i<numofmal; i++){
-            mals.add(i,new Mal());
+    private void MakeMal() { //말을 생성한다.
+        for (int i = 0; i < numofmal; i++) {
+            mals.add(i, new Mal());
         }
     }
 
@@ -31,5 +31,37 @@ public class Player {
 
     public void setMals(ArrayList<Mal> mals) {
         this.mals = mals;
+    }
+
+    public void ShowMalsInfo() {
+        System.out.print("현재 지니고 있는 말 :");
+        for (int i = 0; i < numofmal; i++) {
+            Mal mal = mals.get(i);
+            if (!mal.isArrive()) { //도착하지 않았다면
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+
+
+        System.out.print("필드에 존재하는 말 :");
+        for (int i = 0; i < numofmal; i++) {
+            Mal mal = mals.get(i);
+            if (mal.getBeforelocatoin() != null) { //필드에 존재하는 말
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+
+        System.out.print("도착한 말 :");
+        for (int i = 0; i < numofmal; i++) {
+            Mal mal = mals.get(i);
+            if (mal.isArrive()) { //필드에 존재하는 말
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+
+
     }
 }

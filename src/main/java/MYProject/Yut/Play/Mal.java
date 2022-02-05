@@ -4,11 +4,13 @@ public class Mal {
     private Location location;
     private Location beforelocatoin;
     private boolean straight;
+    private boolean arrive;
 
 
     public Mal() {
         this.location = new Location(30,30);
         this.straight = true;
+        this.arrive = false;
     }
 
     public Location getLocation() {
@@ -35,4 +37,11 @@ public class Mal {
         this.straight = straight;
     }
 
+    public boolean isArrive() {
+        return arrive;
+    }
+
+    public void setArrive(boolean arrive) {
+        this.arrive = arrive;
+    }
 }
