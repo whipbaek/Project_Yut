@@ -90,6 +90,7 @@ public class Board {
                 if(mal.getBeforelocatoin()!=null){
                     if(x==30 && y == 30 && count > 0){
                         System.out.println("도착!");
+                        mal.setArrive(true);
                         mal.setLocation(t_location);
                         return mal;
                     }

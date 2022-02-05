@@ -51,22 +51,36 @@ public class WholeGame {
             while (true) {
                 System.out.println("어떤 말을 옮기시겠습니까?");
                 int movingmal = sc.nextInt();
-                Mal movemal = mals.get(movingmal);
 
-                if (movemal.isArrive()) {
-                    System.out.println("해당말은 도착한 말입니다. 다른 말을 골라주세요");
+                if (mals.get(movingmal) == null) {
+                    System.out.println("필드에 존재하는 말을 선택해주세요");
                     continue;
-                } else {
-                    board.ChangeMal(movemal, yut_grade);
-                    break;
                 }
+
+            Mal movemal = mals.get(movingmal);
+
+            if (movemal.isArrive()) {
+                System.out.println("해당말은 도착한 말입니다. 다른 말을 골라주세요");
+                continue;
+            } else {
+                board.ChangeMal(movemal, yut_grade);
+                if (movemal.isArrive()) {
+                    nowplayer.setNumofmal(nowplayer.getNumofmal() - 1); //도착했으면 해당 플레이어의 말 수를 제외함
+                }
+                break;
             }
-
-            if(nowplayeridx == numofplayer-1) nowplayeridx = 0;
-            else nowplayeridx++;
-
-
         }
-        winner++;
+
+        if (nowplayer.getNumofmal() == 0) {
+            winner = nowplayeridx;
+        }
+
+        //플레이어 순서 변환
+        if (nowplayeridx == numofplayer - 1) nowplayeridx = 0;
+        else nowplayeridx++;
+
     }
+
+        System.out.println("우승자는 "+winner +" 입니다");
+}
 }
