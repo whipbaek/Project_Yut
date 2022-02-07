@@ -1,16 +1,19 @@
 package MYProject.Yut.Play;
 
 public class Mal {
-    private Location location;
-    private Location beforelocatoin;
-    private boolean straight;
-    private boolean arrive;
+    private Location location; // 말의 현재 위치
+    private Location beforelocatoin; //전의 위치 & 말이 출발했는가
+    private boolean straight; //직선으로 움직이는가
+    private boolean arrive; // 말이 도착했는가
+    private int group; // 해당 말이 그룹에 속해있는가(업혀 있는가)
 
+    static public int group_num = 1;
 
     public Mal() {
-        this.location = new Location(30,30);
+        this.location = new Location(30, 30); //초기값은 시작점
         this.straight = true;
         this.arrive = false;
+        this.group = 0;
     }
 
     public Location getLocation() {
@@ -39,6 +42,14 @@ public class Mal {
 
     public boolean isArrive() {
         return arrive;
+    }
+
+    public int getGroup() {
+        return group;
+    }
+
+    public void setGroup(int group) {
+        this.group = group;
     }
 
     public void setArrive(boolean arrive) {

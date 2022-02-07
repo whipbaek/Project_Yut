@@ -1,6 +1,6 @@
 package MYProject.Yut.Play;
 
-public class Board {
+public class Move { //말의 이동에 대하여 책임을 지는 객체
 
     public enum direction {
         위, 아래, 좌, 우, 왼대, 우대, 뒤
@@ -11,13 +11,13 @@ public class Board {
         Location location1 = new Location(location.getX(), location.getY());
         int x = location1.getX();
         int y = location.getY();
-        if (direction == Board.direction.위) {
+        if (direction == Move.direction.위) {
             location1.setX(x - 6);
-        } else if (direction == Board.direction.좌) {
+        } else if (direction == Move.direction.좌) {
             location1.setY(y - 6);
-        } else if (direction == Board.direction.아래) {
+        } else if (direction == Move.direction.아래) {
             location1.setX(x + 6);
-        } else if (direction == Board.direction.우) {
+        } else if (direction == Move.direction.우) {
             location1.setY(y + 6);
         }
 
@@ -31,10 +31,10 @@ public class Board {
         int x = location1.getX();
         int y = location.getY();
 
-        if (direction == Board.direction.왼대) {
+        if (direction == Move.direction.왼대) {
             location1.setX(x + 5);
             location1.setY(y - 5);
-        } else if (direction == Board.direction.우대) {
+        } else if (direction == Move.direction.우대) {
             location1.setX(x + 5);
             location1.setY(y + 5);
         }
@@ -52,11 +52,12 @@ public class Board {
         int y = t_location.getY();
 
         if(grade == Yut_Grade.백도){
-            if(mal.getBeforelocatoin() != null){
+            System.out.println("백도로 진입");
+            if(mal.getBeforelocatoin() != null){ //첫 시작이 아니라면
                 mal.setLocation(mal.getBeforelocatoin());
                 return mal;
             }
-            else{
+            else{ //첫 시작이라면
                 return mal;
             }
         }
@@ -66,7 +67,7 @@ public class Board {
                 {
 
                     if(mal.getBeforelocatoin()!=null){
-                        if(x==30 && y == 30 && count > 0){
+                        if(x==30 && y == 30 && count > 0){ //중앙에서 오른 대각선으로도착한다면
                             System.out.println("도착!");
                             mal.setArrive(true);
                             mal.setLocation(t_location);
@@ -87,7 +88,7 @@ public class Board {
                 x = t_location.getX();
                 y = t_location.getY();
 
-                if(mal.getBeforelocatoin()!=null){
+                if(mal.getBeforelocatoin()!=null){ //직선으로 도착했을때
                     if(x==30 && y == 30 && count > 0){
                         System.out.println("도착!");
                         mal.setArrive(true);
@@ -129,6 +130,8 @@ public class Board {
 
          x = t_location.getX();
          y = t_location.getY();
+
+         //말의 이동이 끝나는 시점, 잡기나 업기를 확인한다.
 
         if ((x == 0 && y == 30) || (x == 0 && y == 0) || (x == 15 && y == 15)) {
             System.out.println("대각선으로 이동해야합니다. 좌표[" + x + "," + y + "]");
