@@ -1,6 +1,6 @@
 package MYProject.Yut.Play;
 
-public class Move { //말의 이동에 대하여 책임을 지는 객체
+public class Move extends Mal { //말의 이동에 대하여 책임을 지는 객체
 
     public enum direction {
         위, 아래, 좌, 우, 왼대, 우대, 뒤
@@ -9,8 +9,10 @@ public class Move { //말의 이동에 대하여 책임을 지는 객체
     //직선(좌,우,상,하)은 6씩 이동
     public Location StraightMove(direction direction, Location location) {
         Location location1 = new Location(location.getX(), location.getY());
+
         int x = location1.getX();
         int y = location.getY();
+
         if (direction == Move.direction.위) {
             location1.setX(x - 6);
         } else if (direction == Move.direction.좌) {
@@ -51,23 +53,21 @@ public class Move { //말의 이동에 대하여 책임을 지는 객체
         int x = t_location.getX();
         int y = t_location.getY();
 
-        if(grade == Yut_Grade.백도){
+        if(grade == Yut_Grade.백도){ //예외 1 백도 처리
             System.out.println("백도로 진입");
             if(mal.getBeforelocatoin() != null){ //첫 시작이 아니라면
                 mal.setLocation(mal.getBeforelocatoin());
                 return mal;
             }
-            else{ //첫 시작이라면
-                return mal;
-            }
+            return mal; //첫 시작이라면
         }
+
+
         if ( (x == y) && (x!=30 && y!=30) ) { //오른 대각선 이동
 
             for(int i=count; i>0; i--) {
                 {
-
-                    if(mal.getBeforelocatoin()!=null){
-                        if(x==30 && y == 30 && count > 0){ //중앙에서 오른 대각선으로도착한다면
+                    if(isMalArrive(mal,count)){
                             System.out.println("도착!");
                             mal.setArrive(true);
                             mal.setLocation(t_location);
@@ -80,8 +80,6 @@ public class Move { //말의 이동에 대하여 책임을 지는 객체
                     t_location = DiagonalMove(direction.우대, t_location);
                 }
             }
-        }
-
         else {
             for (int i = count; i > 0; i--) {
 
@@ -131,7 +129,6 @@ public class Move { //말의 이동에 대하여 책임을 지는 객체
          x = t_location.getX();
          y = t_location.getY();
 
-         //말의 이동이 끝나는 시점, 잡기나 업기를 확인한다.
 
         if ((x == 0 && y == 30) || (x == 0 && y == 0) || (x == 15 && y == 15)) {
             System.out.println("대각선으로 이동해야합니다. 좌표[" + x + "," + y + "]");

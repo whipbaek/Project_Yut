@@ -13,6 +13,7 @@ public class Location {
 
     }
 
+
     public int getX() {
         return x;
     }
@@ -28,4 +29,6 @@ public class Location {
     public void setY(int y) {
         this.y = y;
     }
+
+
 }

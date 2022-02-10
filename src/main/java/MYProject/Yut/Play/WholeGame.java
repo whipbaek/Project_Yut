@@ -3,7 +3,6 @@ package MYProject.Yut.Play;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.zip.Deflater;
 
 public class WholeGame {
     private ArrayList<Player> players = new ArrayList<>();
@@ -11,13 +10,13 @@ public class WholeGame {
     int numofplayer;
     int numofmal;
 
-    public WholeGame(int numofplayer, int numofmal) {
+    public WholeGame(int numofplayer, int numofmal) { //게임을 만든다
         this.numofplayer = numofplayer;
         this.numofmal = numofmal;
         MakeGame();
     }
 
-    private void MakeGame() { //말을 생성한다.
+    private void MakeGame() { //플레이어와 윷을 생성한다.
         for (int i = 0; i < numofplayer; i++) {
             players.add(i, new Player(numofmal));
         }
@@ -46,17 +45,24 @@ public class WholeGame {
 
             Player nowplayer = players.get(nowplayeridx);
             ArrayList<Mal> mals = nowplayer.getMals(); // 플레이어의 말 셋을 가져온다.
-            nowplayer.ShowMalsInfo(); //플레이어의 말 정보를 출력한다.
+            nowplayer.ShowAllMalsInfo(); //플레이어의 말 정보를 출력한다.
 
             while (true) {
                 try {
-                    if(nowplayer.getNumOfFieldMals() == 0) {
+                    if(nowplayer.getNumOfFieldMals() == 0 && yut_grade == Yut_Grade.백도) {
                         System.out.println("필드에 존재하는 말이 없습니다. 턴을 넘깁니다.");
                         break;
 
                     }
-                    System.out.print("어떤 말을 옮기시겠습니까? ");
+                    System.out.println("어떤 말을 옮기시겠습니까? ");
+
+                    for(int i=0; i<numofmal; i++){
+                        Location tempmal_loca = nowplayer.getMals().get(i).getLocation();
+                        System.out.println(i + "번 째 말의 현재 위치 : (" + tempmal_loca.getX() +" , " + tempmal_loca.getY() + ")" );
+                    }
+
                     int movingmal = sc.nextInt();
+
 
                     Mal movemal = mals.get(movingmal);
 
@@ -70,7 +76,7 @@ public class WholeGame {
                                 continue;
                             }
                         }
-                        nowplayer.PlayerChangeMal(movemal, yut_grade);
+                        nowplayer.PlayerChangeMal(movemal, yut_grade, players, nowplayer);
                         if (movemal.isArrive()) {
                             nowplayer.setNumofmal(nowplayer.getNumofmal() - nowplayer.numOfSameGroup(movemal)); //도착했으면 해당 플레이어의 말 수를 제외함
                             System.out.println("도착해서 말수를 제외");
@@ -133,15 +139,21 @@ public class WholeGame {
 
             Player nowplayer = players.get(nowplayeridx);
             ArrayList<Mal> mals = nowplayer.getMals(); // 플레이어의 말 셋을 가져온다.
-            nowplayer.ShowMalsInfo(); //플레이어의 말 정보를 출력한다.
+            nowplayer.ShowAllMalsInfo(); //플레이어의 말 정보를 출력한다.
 
             while (true) {
                 try {
-                    if(nowplayer.getNumOfFieldMals() == 0) {
+                    if(nowplayer.getNumOfFieldMals() == 0 && yut_grade == Yut_Grade.백도) {
                         System.out.println("필드에 존재하는 말이 없습니다. 턴을 넘깁니다.");
                         break;
                     }
-                    System.out.print("어떤 말을 옮기시겠습니까? ");
+                    System.out.println("어떤 말을 옮기시겠습니까? ");
+
+                    for(int i=0; i<numofmal; i++){
+                        Location tempmal_loca = nowplayer.getMals().get(i).getLocation();
+                        System.out.println(i + "번 째 말의 현재 위치 : (" + tempmal_loca.getX() +" , " + tempmal_loca.getY() + ")" );
+                    }
+
                     int movingmal = sc.nextInt();
 
                     Mal movemal = mals.get(movingmal);
@@ -156,7 +168,7 @@ public class WholeGame {
                                 continue;
                             }
                         }
-                        nowplayer.PlayerChangeMal(movemal, yut_grade);
+                        nowplayer.PlayerChangeMal(movemal, yut_grade, players, nowplayer);
                         if (movemal.isArrive()) {
                             nowplayer.setNumofmal(nowplayer.getNumofmal() - nowplayer.numOfSameGroup(movemal)); //도착했으면 해당 플레이어의 말 수를 제외함
                             System.out.println("도착해서 말수를 제외");
