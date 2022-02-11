@@ -2,7 +2,7 @@ package MYProject.Yut.Play;
 
 import java.util.ArrayList;
 
-public class Player extends Mal{
+public class Player extends Mal {
     private int numofmal;
     private ArrayList<Mal> mals = new ArrayList<>();
     private Move move;
@@ -35,7 +35,7 @@ public class Player extends Mal{
         this.mals = mals;
     }
 
-    public void ShowMalsIhave(){
+    public void ShowMalsIhave() {
         System.out.print("현재 지니고 있는 말 : ");
         for (int i = 0; i < numofmal; i++) {
             Mal mal = mals.get(i);
@@ -45,7 +45,7 @@ public class Player extends Mal{
         }
     }
 
-    public void ShowMalsInField (){
+    public void ShowMalsInField() {
         System.out.print("필드에 존재하는 말 : ");
         for (int i = 0; i < numofmal; i++) {
             if (isExistMalInField(mals.get(i))) { //필드에 존재하는 말
@@ -54,7 +54,7 @@ public class Player extends Mal{
         }
     }
 
-    public void ShowMalsArrived(){
+    public void ShowMalsArrived() {
         System.out.print("도착한 말 : ");
         for (int i = 0; i < numofmal; i++) {
             Mal mal = mals.get(i);
@@ -65,26 +65,38 @@ public class Player extends Mal{
     }
 
     public void ShowAllMalsInfo() {
-        ShowMalsIhave();   System.out.println();
-        ShowMalsInField(); System.out.println();
-        ShowMalsArrived(); System.out.println();
+        ShowMalsIhave();
+        System.out.println();
+        ShowMalsInField();
+        System.out.println();
+        ShowMalsArrived();
+        System.out.println();
     }
 
-    public int getNumOfFieldMals(){ //필드에 존재하는 말들의 개수를 반환한다.
+    public void ShowAllMalLocation() {
+        for (int i = 0; i < numofmal; i++) {
+            System.out.println(i + "번째 말의 위치 : [" + mals.get(i).getLocation().getX() +
+                    "," + mals.get(i).getLocation().getY() + "]");
+        }
+
+    }
+
+
+    public int getNumOfFieldMals() { //필드에 존재하는 말들의 개수를 반환한다.
         int num = 0;
 
         for (int i = 0; i < numofmal; i++) {
-            if(isExistMalInField(mals.get(i))) num++;
+            if (isExistMalInField(mals.get(i))) num++;
         }
         return num;
     }
 
-    public int numOfSameGroup(Mal mal){ //말중 같은 그룹이 몇개있는지 반환한다.
+    public int numOfSameGroup(Mal mal) { //말중 같은 그룹이 몇개있는지 반환한다.
         int initial_num = 1;
 
-        for(int i=0; i<numofmal; i++){
-            if(mal.getGroup() > 0 && mal != mals.get(i)) { //그룹에 속해있으며, 그룹이 없을때는 1을 반환하기위해 본인은 제외함
-                if (isSameGroup(mal,mals.get(i))) {
+        for (int i = 0; i < numofmal; i++) {
+            if (mal.getGroup() > 0 && mal != mals.get(i)) { //그룹에 속해있으며, 그룹이 없을때는 1을 반환하기위해 본인은 제외함
+                if (isSameGroup(mal, mals.get(i))) {
                     initial_num++;
                 }
             }
@@ -93,49 +105,46 @@ public class Player extends Mal{
     }
 
 
-    public void PlayerChangeMal(Mal mal, Yut_Grade yut_grade, ArrayList<Player> players, Player nowplayer){
-        for(int i=0; i<numofmal; i++) {
+    public void PlayerChangeMal(Mal mal, Yut_Grade yut_grade, ArrayList<Player> players) {
+        for (int i = 0; i < numofmal; i++) {
             if (mal.getGroup() > 0) {//그룹이 존재한다면
-                if (mal.getGroup() == mals.get(i).getGroup()){//그룹이 같은 말들 모두 이동시킨다.
-                    move.ChangeMal(mals.get(i),yut_grade);
+                if (mal.getGroup() == mals.get(i).getGroup()) {//그룹이 같은 말들 모두 이동시킨다.
+                    move.ChangeMal(mals.get(i), yut_grade);
                 }
-            }
-            else{ //그룹이 존재하지 안는다면
-                move.ChangeMal(mal,yut_grade);
+            } else { //그룹이 존재하지 안는다면
+                move.ChangeMal(mal, yut_grade);
                 break;
             }
         }
 
         PiggyBack(mal); //이동한 후에 그위치에 같은 말이 있는지 검사한다. (업기 기능)
-        GetTargetMal(mal, players, nowplayer);
+        GetTargetMal(mal, players);
 
     }
 
     private void PiggyBack(Mal mal) {
-        for(int i=0; i<mals.size(); i++) {
-            if (mal.getBeforelocatoin() != null && isSameLocation(mal,mals.get(i))) {
-                    System.out.println("말을 업습니다.");
-                    MakeGroup(mals.get(i));
+        for (int i = 0; i < mals.size(); i++) {
+            if (mal.getBeforelocatoin() != null && isSameLocation(mal, mals.get(i))) {
+                System.out.println("말을 업습니다.");
+                MakeGroup(mals.get(i));
             }
         }
         group_num++;
     }
 
-    public void MakeGroup(Mal mal){
+    public void MakeGroup(Mal mal) {
         mal.setGroup(group_num);
     }
 
-    private void GetTargetMal(Mal mal, ArrayList<Player> players, Player nowplayer){
+    private void GetTargetMal(Mal mal, ArrayList<Player> players) {
 
-        for(int i=0; i<players.size(); i++){
-            if(players.get(i) == nowplayer) continue;
+        for (Player player : players) {
+            if (player == this) continue;
 
-            for(int j=0; j<numofmal; j++){
-                Mal targetmal = players.get(i).getMals().get(j);
-                if(isSameLocation(mal,targetmal)){
-                   initializeMal(targetmal);
-
-                    System.out.println(players.get(i) + "P의 " + targetmal + "말을 잡았습니다.");
+            for (Mal targetmal : player.getMals()) {
+                if (isSameLocation(mal, targetmal) && isExistMalInField(targetmal)) {
+                    initializeMal(targetmal);
+                    System.out.println(player + "P의 " + targetmal + " 말을 잡았습니다.");
                 }
             }
         }

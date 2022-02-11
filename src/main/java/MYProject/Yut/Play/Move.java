@@ -1,5 +1,7 @@
 package MYProject.Yut.Play;
 
+import com.sun.source.tree.BreakTree;
+
 public class Move extends Mal { //말의 이동에 대하여 책임을 지는 객체
 
     public enum direction {
@@ -46,7 +48,7 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
 
     public Mal ChangeMal(Mal mal, Yut_Grade grade) {
 
-        Location t_location = mal.getLocation();
+        Location t_location = mal.getLocation(); //t_location의 필요성?
 
         int count = grade.getValue(); //윷 값에 따른 이동 횟수
 
@@ -64,20 +66,19 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
 
 
         if ( (x == y) && (x!=30 && y!=30) ) { //오른 대각선 이동
-
+            System.out.println("우 대각선 이동!");
             for(int i=count; i>0; i--) {
-                {
                     if(isMalArrive(mal,count)){
                             System.out.println("도착!");
                             mal.setArrive(true);
                             mal.setLocation(t_location);
                             return mal;
                         }
-                    }
 
                     mal.setBeforelocatoin(t_location);
                     System.out.println("우 대각선으로 이동");
                     t_location = DiagonalMove(direction.우대, t_location);
+                    mal.setLocation(t_location);
                 }
             }
         else {
@@ -129,15 +130,19 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
          x = t_location.getX();
          y = t_location.getY();
 
-
-        if ((x == 0 && y == 30) || (x == 0 && y == 0) || (x == 15 && y == 15)) {
-            System.out.println("대각선으로 이동해야합니다. 좌표[" + x + "," + y + "]");
-            mal.setStraight(false);
-        }
+        mal.setStraight(isStraightMove(x,y)); //대각선으로 움직여야 하는가?
 
         mal.setLocation(t_location);
 
         return mal;
     }
 
+    private boolean isStraightMove(int x, int y){ // 대각선으로 움직여야하는지 판단
+
+        if((x == 0 && y == 30) || (x == 0 && y == 0) || (x == 15 && y == 15)){
+            System.out.println("대각선으로 이동해야합니다. 좌표[" + x + "," + y + "]");
+            return false;
+        }
+        return true;
+    }
 }

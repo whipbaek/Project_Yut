@@ -2,34 +2,99 @@ package PlayTest;
 
 
 import MYProject.Yut.Play.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class PlayTest {
 
+    ArrayList<Player> players;
+    Yut yut;
+    Move move;
+
+    Player player1;
+    Player player2;
+
+    Mal p1_mal0;
+    Mal p1_mal1;
+    Mal p2_mal0;
+    Mal p2_mal1;
+
+    @BeforeEach
+    public void initial() {
+        players = new ArrayList<>();
+        players.add(0, new Player(2));
+        players.add(1, new Player(2));
+
+        yut = new Yut();
+        move = new Move();
+
+        player1 = players.get(0);
+        player2 = players.get(1);
+
+        p1_mal0 = player1.getMals().get(0);
+        p1_mal1 = player1.getMals().get(1);
+
+        p2_mal0 = player2.getMals().get(0);
+        p2_mal1 = player2.getMals().get(1);
+    }
+
+    public void sameLocationAssertionTest(Mal mal1, Mal mal2) {
+        assertThat(mal1.getLocation().getX()).isEqualTo(mal2.getLocation().getX());
+        assertThat(mal1.getLocation().getY()).isEqualTo(mal2.getLocation().getY());
+    }
+
+    public boolean isThisPlayerWinner(Player player){
+        for(int i=0; i<2; i++) {
+            if (!player.getMals().get(i).isArrive()) return false;
+        }
+        return true;
+    }
 
     @Test
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public void playTest1() {
+        player1.PlayerChangeMal(p1_mal0,Yut_Grade.모,players);
+        player1.PlayerChangeMal(p1_mal0,Yut_Grade.걸,players);
+        player1.PlayerChangeMal(p1_mal0,Yut_Grade.걸,players);
+    }
 
-        System.out.println("말의 개수를 입력하세요");
-        int n = sc.nextInt();
-        Player player = new Player(n);
+    @Test
+    public void playTest2() {
 
-        for(Mal mal : player.getMals())
-            System.out.println("mal = " + mal);
 
-        System.out.println("현재 보드에 없는 말은");
-        for(int i=0; i<player.getMals().size(); i++){
-            Mal t_mal = player.getMals().get(i);
-            if(t_mal.getBeforelocatoin() == null){
-                System.out.println(i + " ");
-            }
-        }
-        System.out.println("번째 말들입니다.");
+        player1.PlayerChangeMal(p1_mal0,Yut_Grade.도,players);
+        player1.PlayerChangeMal(p1_mal1,Yut_Grade.도,players); //업음
+        player1.PlayerChangeMal(p1_mal0,Yut_Grade.개,players); //업은채로 이동
+
+        sameLocationAssertionTest(p1_mal1,p1_mal0);
+
+        player2.PlayerChangeMal(p2_mal0,Yut_Grade.걸,players); //업힌 말을 잡음
+        player2.PlayerChangeMal(p2_mal1,Yut_Grade.걸,players); //말 업음
+        System.out.println("중간점검");
+        player2.ShowAllMalLocation();
+
+
+        player2.PlayerChangeMal(p2_mal1,Yut_Grade.개,players);
+        System.out.println("중간점검2");
+        player2.ShowAllMalLocation();
+
+        player2.PlayerChangeMal(p2_mal1,Yut_Grade.걸,players);
+        System.out.println("중간점검3");
+        player2.ShowAllMalLocation();
+
+        player2.PlayerChangeMal(p2_mal1,Yut_Grade.윷,players);
+
+        player2.ShowAllMalLocation();
+        player2.ShowAllMalsInfo();
+    }
+
+    @Test
+    public void playTest3() {
+
     }
 }

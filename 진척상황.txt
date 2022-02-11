@@ -107,4 +107,14 @@
 Move클래스와 말을 이동하는 메소드들이 너무 복잡하다. 조금 더 가독성좋게 리팩토링해보자.
 
 
+<<22/2/11>
 
+-보안할 점
+
+1. playerchangemal 메소드 실행에 있어서 players 리스트와, player의 정보를 받는것은 좋지않다.
+   player에 속해있는 메소드로 말을 체인지하는데 본인의 정보를 넘기는건 더욱 이상. 
+   -> players의 리스트만 따로 받아서 로직을 실행할때 적용해야함.
+
+2. t_location이라는 temporal location 객체를 만들어서 임의로 값을 저장해두는데,
+   t_location이 아니라 그냥 바로바로 mal의 기본 location에 저장하면 되지않는가? 
+   t_location의 필요성?

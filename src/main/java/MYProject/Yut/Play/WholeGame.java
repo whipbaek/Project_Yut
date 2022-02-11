@@ -76,7 +76,7 @@ public class WholeGame {
                                 continue;
                             }
                         }
-                        nowplayer.PlayerChangeMal(movemal, yut_grade, players, nowplayer);
+                        nowplayer.PlayerChangeMal(movemal, yut_grade, players);
                         if (movemal.isArrive()) {
                             nowplayer.setNumofmal(nowplayer.getNumofmal() - nowplayer.numOfSameGroup(movemal)); //도착했으면 해당 플레이어의 말 수를 제외함
                             System.out.println("도착해서 말수를 제외");
@@ -168,7 +168,7 @@ public class WholeGame {
                                 continue;
                             }
                         }
-                        nowplayer.PlayerChangeMal(movemal, yut_grade, players, nowplayer);
+                        nowplayer.PlayerChangeMal(movemal, yut_grade, players);
                         if (movemal.isArrive()) {
                             nowplayer.setNumofmal(nowplayer.getNumofmal() - nowplayer.numOfSameGroup(movemal)); //도착했으면 해당 플레이어의 말 수를 제외함
                             System.out.println("도착해서 말수를 제외");

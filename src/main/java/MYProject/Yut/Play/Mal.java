@@ -59,6 +59,8 @@ public class Mal implements Mal_I{
         return false;
     }
 
+
+
     public Location getLocation() {
         return location;
     }
