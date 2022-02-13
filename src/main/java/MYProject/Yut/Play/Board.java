@@ -14,4 +14,6 @@ public class Board {
             players.get(i).ShowAllMalsInfo();
         }
     }
+
+
 }

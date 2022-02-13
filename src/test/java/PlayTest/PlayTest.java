@@ -58,15 +58,20 @@ public class PlayTest {
 
     @Test
     public void playTest1() {
+        System.out.println("Start Test1");
+        player1.PlayerChangeMal(p1_mal0,Yut_Grade.윷,players);
         player1.PlayerChangeMal(p1_mal0,Yut_Grade.모,players);
+        player1.PlayerChangeMal(p1_mal0,Yut_Grade.도,players);
+        player1.PlayerChangeMal(p1_mal0,Yut_Grade.윷,players);
         player1.PlayerChangeMal(p1_mal0,Yut_Grade.걸,players);
-        player1.PlayerChangeMal(p1_mal0,Yut_Grade.걸,players);
+        player1.ShowAllMalsInfo();
+        player1.ShowAllMalLocation();
     }
 
     @Test
     public void playTest2() {
 
-
+        System.out.println("Start Test2");
         player1.PlayerChangeMal(p1_mal0,Yut_Grade.도,players);
         player1.PlayerChangeMal(p1_mal1,Yut_Grade.도,players); //업음
         player1.PlayerChangeMal(p1_mal0,Yut_Grade.개,players); //업은채로 이동

@@ -136,7 +136,7 @@ public class Player extends Mal {
         mal.setGroup(group_num);
     }
 
-    private void GetTargetMal(Mal mal, ArrayList<Player> players) {
+    public void GetTargetMal(Mal mal, ArrayList<Player> players) {
 
         for (Player player : players) {
             if (player == this) continue;

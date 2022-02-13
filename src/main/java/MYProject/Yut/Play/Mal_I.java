@@ -7,7 +7,6 @@ public interface Mal_I {
     public boolean isSameGroup(Mal mal1, Mal mal2);
     public boolean isSameLocation (Mal mal1, Mal mal2);
     public boolean isSamePosition(Location location1, Location location2);
-    public boolean isMalArrive(Mal mal,int count);
+    public boolean isMalArrive(int count);
 
-
-}
+    }

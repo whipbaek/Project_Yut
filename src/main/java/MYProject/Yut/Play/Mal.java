@@ -52,10 +52,13 @@ public class Mal implements Mal_I{
     }
 
     @Override
-    public boolean isMalArrive(Mal mal,int count){
-        if(mal.getBeforelocatoin() != null &&
-           mal.getLocation().getX()==30 && mal.getLocation().getY()==30 &&
-           count > 0) return true;
+    public boolean isMalArrive(int count){
+        if(this.getBeforelocatoin() != null &&
+           this.getLocation().getX()==30 && this.getLocation().getY()==30 &&
+           count > 0) {
+            this.setArrive(true);
+            return true;
+        }
         return false;
     }
 
