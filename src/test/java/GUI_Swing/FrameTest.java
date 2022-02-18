@@ -97,7 +97,8 @@ class JCheckBoxTest extends JFrame implements ActionListener {
         if (cb6.isSelected()) {
             numofmal = 4;
         }
-        new PlayWindow();
+        //new PlayWindow();
+        new DrawingFigure();
         setVisible(false);
     }
 }

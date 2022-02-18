@@ -5,12 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PlayWindow extends JFrame implements ActionListener {
+public class PlayWindow extends JFrame {
 
     PlayWindow() {
         super("Playing_Project_Yut");
 
         Label l1 = new Label("New Window for Play Game");
+
+
 
         add(l1);
 
@@ -22,8 +24,5 @@ public class PlayWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 }
