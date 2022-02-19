@@ -1,4 +1,4 @@
-package GUI_Swing;
+package MYProject.Yut.GUI_Swing;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -8,8 +8,6 @@ public class FrameTest {
 
     public static void main(String[] args) {
         new JCheckBoxTest();
-//        new JPanel1();
-//        new JTextField1();
     }
 }
 
@@ -42,7 +40,7 @@ class JCheckBoxTest extends JFrame implements ActionListener {
         cb6.setBounds(170, 140, 50, 20);
 
 
-        b = new JButton("확인");
+        b = new JButton("시작");
         b.setBounds(85, 180, 80, 30);
         b.addActionListener(this);
 
@@ -103,53 +101,3 @@ class JCheckBoxTest extends JFrame implements ActionListener {
     }
 }
 
-
-class JPanel1 {
-    JFrame f = new JFrame("제목");
-    JPanel p1 = new JPanel();
-    JLabel l1 = new JLabel("치킨", JLabel.LEFT);
-    JLabel l2 = new JLabel("햄버거", JLabel.RIGHT);
-    JLabel l3 = new JLabel("피자", JLabel.CENTER);
-
-    public JPanel1() {
-        f.add(p1);
-
-        p1.add(l1);
-        p1.add(l2);
-        p1.add(l3);
-
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLocation(600, 300);
-        f.setSize(500, 500);
-        f.setVisible(true);
-
-    }
-}
-
-class JTextField1 {
-    public JTextField1() {
-        JFrame f = new JFrame("제목");
-        JPanel p1 = new JPanel();
-
-        JLabel l1 = new JLabel("아이디");
-        JLabel l2 = new JLabel("비밀번호");
-
-        JTextField txt1 = new JTextField("ID", 10);
-        JTextField txt2 = new JPasswordField(10);
-
-        JButton LogBtn = new JButton("Log in");
-        p1.add(l1);
-        p1.add(txt1);
-
-        p1.add(l2);
-        p1.add(txt2);
-
-        p1.add(LogBtn);
-
-        f.add(p1);
-
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setBounds(600, 300, 500, 500);
-        f.setVisible(true);
-    }
-}

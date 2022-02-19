@@ -1,4 +1,4 @@
-package GUI_Swing;
+package MYProject.Yut.GUI_Swing;
 
 import javax.swing.*;
 import java.awt.*;

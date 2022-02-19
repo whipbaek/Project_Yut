@@ -1,4 +1,4 @@
-package GUI_Swing;
+package MYProject.Yut.GUI_Swing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +33,7 @@ public class DrawingFigure extends JFrame {
         add(b);
 
         setLayout(null);
+        setLocation(450, 200);
         setSize(900, 600);
         setVisible(true);
     }

@@ -105,7 +105,7 @@ public class Player extends Mal {
     }
 
 
-    public void PlayerChangeMal(Mal mal, Yut_Grade yut_grade, ArrayList<Player> players) {
+    public boolean PlayerChangeMal(Mal mal, Yut_Grade yut_grade, ArrayList<Player> players) {
         for (int i = 0; i < numofmal; i++) {
             if (mal.getGroup() > 0) {//그룹이 존재한다면
                 if (mal.getGroup() == mals.get(i).getGroup()) {//그룹이 같은 말들 모두 이동시킨다.
@@ -118,7 +118,8 @@ public class Player extends Mal {
         }
 
         PiggyBack(mal); //이동한 후에 그위치에 같은 말이 있는지 검사한다. (업기 기능)
-        GetTargetMal(mal, players);
+
+        return GetTargetMal(mal, players);
 
     }
 
@@ -136,7 +137,8 @@ public class Player extends Mal {
         mal.setGroup(group_num);
     }
 
-    public void GetTargetMal(Mal mal, ArrayList<Player> players) {
+    public boolean GetTargetMal(Mal mal, ArrayList<Player> players) {
+        boolean getmal=false;
 
         for (Player player : players) {
             if (player == this) continue;
@@ -145,9 +147,11 @@ public class Player extends Mal {
                 if (isSameLocation(mal, targetmal) && isExistMalInField(targetmal)) {
                     initializeMal(targetmal);
                     System.out.println(player + "P의 " + targetmal + " 말을 잡았습니다.");
+                    getmal = true;
                 }
             }
         }
+        return getmal;
     }
 
 
