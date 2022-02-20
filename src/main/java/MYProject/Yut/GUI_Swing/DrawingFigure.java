@@ -2,7 +2,7 @@ package MYProject.Yut.GUI_Swing;
 
 import javax.swing.*;
 import java.awt.*;
-
+/*
 public class DrawingFigure extends JFrame {
     public DrawingFigure() throws HeadlessException {
         setTitle("Project Yut Playing");
@@ -109,3 +109,4 @@ public class DrawingFigure extends JFrame {
     }
 
 }
+*/

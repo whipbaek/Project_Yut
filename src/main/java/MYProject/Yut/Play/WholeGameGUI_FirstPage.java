@@ -1,23 +1,17 @@
-package MYProject.Yut.GUI_Swing;
+package MYProject.Yut.Play;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class WholeGameGUI_FirstPage extends JFrame implements ActionListener {
 
 
-public class FrameTest {
-
-    public static void main(String[] args) {
-        new JCheckBoxTest();
-    }
-}
-
-
-class JCheckBoxTest extends JFrame implements ActionListener {
     JLabel l1, l2;
     JRadioButton cb1, cb2, cb3, cb4, cb5, cb6;
     JButton b;
 
-    JCheckBoxTest() {
+    WholeGameGUI_FirstPage() {
         super("Project_Yut");
         ButtonGroup group1 = new ButtonGroup();
         ButtonGroup group2 = new ButtonGroup();
@@ -71,9 +65,10 @@ class JCheckBoxTest extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int numofplayer;
-        int numofmal;
+        int numofplayer=0;
+        int numofmal=0;
         String msg = "";
+
         if (cb1.isSelected()) {
             numofplayer = 2;
         }
@@ -95,9 +90,11 @@ class JCheckBoxTest extends JFrame implements ActionListener {
         if (cb6.isSelected()) {
             numofmal = 4;
         }
-        //new PlayWindow();
-//        new DrawingFigure();
+        new WholeGameGUI_Playing(numofplayer,numofmal);
         setVisible(false);
     }
-}
 
+    public static void main(String[] args) {
+        new WholeGameGUI_FirstPage();
+    }
+}
