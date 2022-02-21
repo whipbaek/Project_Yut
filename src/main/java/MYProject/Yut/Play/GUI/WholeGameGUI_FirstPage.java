@@ -1,11 +1,10 @@
-package MYProject.Yut.Play;
+package MYProject.Yut.Play.GUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WholeGameGUI_FirstPage extends JFrame implements ActionListener {
-
 
     JLabel l1, l2;
     JRadioButton cb1, cb2, cb3, cb4, cb5, cb6;
