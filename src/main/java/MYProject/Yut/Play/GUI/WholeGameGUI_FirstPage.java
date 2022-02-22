@@ -89,7 +89,7 @@ public class WholeGameGUI_FirstPage extends JFrame implements ActionListener {
         if (cb6.isSelected()) {
             numofmal = 4;
         }
-        new WholeGameGUI_Playing(numofplayer,numofmal);
+        new Temp_WholeGameGUI_Playing(numofplayer,numofmal);
         setVisible(false);
     }
 

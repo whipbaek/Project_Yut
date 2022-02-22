@@ -28,8 +28,8 @@ public class Mal implements Mal_I{
     }
 
     @Override
-    public boolean isExistMalInField(Mal mal){ //말이 필드에 존재하는가?
-        if(mal.getBeforelocatoin() != null && !mal.isArrive()) return true;
+    public boolean isExistMalInField(){ //말이 필드에 존재하는가?
+        if(this.getBeforelocatoin() != null && !this.isArrive()) return true;
         return false;
     }
 

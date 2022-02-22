@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WholeGameGUI_Playing extends JFrame {
+public class Temp_WholeGameGUI_Playing extends JFrame {
 
     private ArrayList<Player> players = new ArrayList<>();
     private ArrayList<Mal> FieldMals = new ArrayList<>();
@@ -23,17 +23,15 @@ public class WholeGameGUI_Playing extends JFrame {
     private JLabel p1m, p2m, p3m, p4m;
     private JButton m1, m2, m3, m4;
 
-    private boolean isnext;
     private int nowplayeridx;
 
-    public WholeGameGUI_Playing(int numofmplayer, int numofmal) throws HeadlessException {
+    public Temp_WholeGameGUI_Playing(int numofmplayer, int numofmal) throws HeadlessException {
         this.numofplayer = numofmplayer;
         this.numofmal = numofmal;
         InitializePlayers();
 
         setTitle("Project Yut Playing1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(new Mypanel());
 
         l1 = new JLabel("1P");
         l2 = new JLabel("2P");
@@ -52,7 +50,7 @@ public class WholeGameGUI_Playing extends JFrame {
 
         Random random = new Random();
         nowplayeridx = random.nextInt(numofplayer); //첫 순서결정
-        System.out.println("nowplayeridx : " + (nowplayeridx +1) );
+        System.out.println("nowplayeridx : " + (nowplayeridx + 1));
         state = new JLabel("첫번째 선수는 " + (nowplayeridx + 1) + "Player 입니다. 윷을 던지세요.");
         add(state);
 
@@ -112,6 +110,11 @@ public class WholeGameGUI_Playing extends JFrame {
         m3.addActionListener(new action_malclick());
         m4.addActionListener(new action_malclick());
 
+
+        players.get(0).getMals().get(0).setLocation(new Location(30, 30));
+        players.get(1).getMals().get(0).setLocation(new Location(25, 25));
+
+
         setLayout(null);
         setLocation(450, 200);
         setSize(900, 600);
@@ -129,7 +132,6 @@ public class WholeGameGUI_Playing extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            isnext = false;
 
             yut_grade = yut.rollingYut();
             if (yut_grade == Yut_Grade.도) {
@@ -149,7 +151,6 @@ public class WholeGameGUI_Playing extends JFrame {
                     state.setText("결과는 백도 입니다. 움직이실 말을 선택해주세요");
                 }
             }
-
         }
     }
 
@@ -185,95 +186,111 @@ public class WholeGameGUI_Playing extends JFrame {
             }
 
 //이것저것 검사하고 말 위치를 바꾸는 로직 실행
-//            nowplayer.PlayerChangeMal(movingmal, yut_grade, players);
+            nowplayer.PlayerChangeMal(movingmal, yut_grade, players);
 //            nowplayer.ShowAllMalsInfo();
 //            nowplayer.ShowAllMalLocation();
 //            백엔드 로직이 끝나고 말을 모두 그려준다.(필드에 있는말들을 모두 확인한다.)
 //            그릴때는 그룹이 같은지도 확인해야한다.
 //            좌표를 매칭해야한다.
+            System.out.println("Repaint");
             repaint();
 
             if (nowplayeridx == numofplayer - 1) {
                 nowplayeridx = 0;
             } else nowplayeridx++;
 
-            state.setText((nowplayeridx + 1) + " Player의 차례입니다.");
+            state.setText((nowplayeridx+1) + "Player의 차례입니다. 윷을 던지세요");
 
         }
     }
 
-    class Mypanel extends JPanel {
 
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawRect(50, 50, 450, 450);
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawRect(50, 50, 450, 450);
 
-            g.setColor(Color.MAGENTA);
-            g.fillOval(600, 70, 25, 25);
+        g.setColor(Color.MAGENTA);
+        g.fillOval(600, 100, 25, 25);
 
-            g.setColor(Color.ORANGE);
-            g.fillOval(600, 110, 25, 25);
+        g.setColor(Color.ORANGE);
+        g.fillOval(600, 140, 25, 25);
 
-            if (numofplayer > 2) {
-                g.setColor(Color.PINK);
-                g.fillOval(600, 150, 25, 25);
-            }
-
-            if (numofplayer > 3) {
-                g.setColor(Color.CYAN);
-                g.fillOval(600, 190, 25, 25);
-            }
-
-            g.setColor(Color.black);
-            g.drawOval(75, 75, 80, 80); //왼위
-            g.drawOval(395, 75, 80, 80); // 오위
-
-            g.drawOval(75, 380, 80, 80); //왼아래
-            g.drawOval(395, 380, 80, 80); //오아래
-
-            g.drawOval(235, 225, 80, 80);
-
-            //왼쪽 기둥
-            g.drawOval(100, 165, 35, 35);
-            g.drawOval(100, 220, 35, 35);
-            g.drawOval(100, 275, 35, 35);
-            g.drawOval(100, 330, 35, 35);
-
-            //위쪽 기둥
-            g.drawOval(165, 100, 35, 35);
-            g.drawOval(220, 100, 35, 35);
-            g.drawOval(275, 100, 35, 35);
-            g.drawOval(330, 100, 35, 35);
-
-            //왼아래 대각선
-            g.drawOval(155, 155, 35, 35);
-            g.drawOval(195, 195, 35, 35);
-
-            g.drawOval(315, 315, 35, 35);
-            g.drawOval(355, 355, 35, 35);
-
-            //오른쪽편 대각
-            g.drawOval(155, 355, 35, 35);
-            g.drawOval(195, 315, 35, 35);
-
-            g.drawOval(355, 155, 35, 35);
-            g.drawOval(315, 195, 35, 35);
-
-            //오른쪽 기둥
-            g.drawOval(410, 165, 35, 35);
-            g.drawOval(410, 220, 35, 35);
-            g.drawOval(410, 275, 35, 35);
-            g.drawOval(410, 330, 35, 35);
-
-            //아래쪽 기둥
-            g.drawOval(165, 410, 35, 35);
-            g.drawOval(220, 410, 35, 35);
-            g.drawOval(275, 410, 35, 35);
-            g.drawOval(330, 410, 35, 35);
-
+        if (numofplayer > 2) {
+            g.setColor(Color.PINK);
+            g.fillOval(600, 180, 25, 25);
         }
+
+        if (numofplayer > 3) {
+            g.setColor(Color.CYAN);
+            g.fillOval(600, 220, 25, 25);
+        }
+
+        g.setColor(Color.black);
+        g.drawOval(75, 75, 80, 80); //왼위
+        g.drawOval(395, 75, 80, 80); // 오위
+
+        g.drawOval(75, 380, 80, 80); //왼아래
+        g.drawOval(395, 380, 80, 80); //오아래
+
+        g.drawOval(235, 225, 80, 80);
+
+        //왼쪽 기둥
+        g.drawOval(100, 165, 35, 35);
+        g.drawOval(100, 220, 35, 35);
+        g.drawOval(100, 275, 35, 35);
+        g.drawOval(100, 330, 35, 35);
+
+        //위쪽 기둥
+        g.drawOval(165, 100, 35, 35);
+        g.drawOval(220, 100, 35, 35);
+        g.drawOval(275, 100, 35, 35);
+        g.drawOval(330, 100, 35, 35);
+
+        //왼아래 대각선
+        g.drawOval(155, 155, 35, 35);
+        g.drawOval(195, 195, 35, 35);
+
+        g.drawOval(315, 315, 35, 35);
+        g.drawOval(355, 355, 35, 35);
+
+        //오른쪽편 대각
+        g.drawOval(155, 355, 35, 35);
+        g.drawOval(195, 315, 35, 35);
+
+        g.drawOval(355, 155, 35, 35);
+        g.drawOval(315, 195, 35, 35);
+
+        //오른쪽 기둥
+        g.drawOval(410, 165, 35, 35);
+        g.drawOval(410, 220, 35, 35);
+        g.drawOval(410, 275, 35, 35);
+        g.drawOval(410, 330, 35, 35);
+
+        //아래쪽 기둥
+        g.drawOval(165, 410, 35, 35);
+        g.drawOval(220, 410, 35, 35);
+        g.drawOval(275, 410, 35, 35);
+        g.drawOval(330, 410, 35, 35);
+
+
+        for(int i=0; i<numofplayer; i++){
+            if(i==0) g.setColor(Color.MAGENTA);
+            else if(i==1) g.setColor(Color.ORANGE);
+            else if(i==2) g.setColor(Color.PINK);
+            else g.setColor(Color.CYAN);
+
+            for(int j=0; j<numofmal; j++){
+                Mal Movingmal = players.get(i).getMals().get(j);
+                if(Movingmal.isExistMalInField()){
+                    Location location = mappingLocation(Movingmal.getLocation().getX(), Movingmal.getLocation().getY());
+                    g.fillOval(location.getX(),location.getY(),25,25);
+                }
+            }
+        }
+
     }
+
 
     private void InitializePlayers() { //플레이어와 윷을 생성한다.
         for (int i = 0; i < numofplayer; i++) {

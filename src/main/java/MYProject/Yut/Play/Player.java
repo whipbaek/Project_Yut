@@ -48,7 +48,7 @@ public class Player extends Mal {
     public void ShowMalsInField() {
         System.out.print("필드에 존재하는 말 : ");
         for (int i = 0; i < numofmal; i++) {
-            if (isExistMalInField(mals.get(i))) { //필드에 존재하는 말
+            if (mals.get(i).isExistMalInField()) { //필드에 존재하는 말
                 System.out.print(i + " ");
             }
         }
@@ -86,7 +86,7 @@ public class Player extends Mal {
         int num = 0;
 
         for (int i = 0; i < numofmal; i++) {
-            if (isExistMalInField(mals.get(i))) num++;
+            if (mals.get(i).isExistMalInField()) num++;
         }
         return num;
     }
@@ -144,7 +144,7 @@ public class Player extends Mal {
             if (player == this) continue;
 
             for (Mal targetmal : player.getMals()) {
-                if (isSameLocation(mal, targetmal) && isExistMalInField(targetmal)) {
+                if (isSameLocation(mal, targetmal) && targetmal.isExistMalInField()) {
                     initializeMal(targetmal);
                     System.out.println(player + "P의 " + targetmal + " 말을 잡았습니다.");
                     getmal = true;
