@@ -54,6 +54,13 @@ public class Player extends Mal {
         }
     }
 
+    public boolean isExsitanymalsinfield(){
+        for(Mal mal : mals){
+            if(mal.isExistMalInField()) return true;
+        }
+        return false;
+    }
+
     public void ShowMalsArrived() {
         System.out.print("도착한 말 : ");
         for (int i = 0; i < numofmal; i++) {
@@ -96,7 +103,7 @@ public class Player extends Mal {
 
         for (int i = 0; i < numofmal; i++) {
             if (mal.getGroup() > 0 && mal != mals.get(i)) { //그룹에 속해있으며, 그룹이 없을때는 1을 반환하기위해 본인은 제외함
-                if (isSameGroup(mal, mals.get(i))) {
+                if (mal.isSameGroup(mals.get(i))) {
                     initial_num++;
                 }
             }
@@ -118,7 +125,7 @@ public class Player extends Mal {
         }
 
         PiggyBack(mal); //이동한 후에 그위치에 같은 말이 있는지 검사한다. (업기 기능)
-
+        System.out.println("말 beforelocation : " + mal.getBeforelocatoin().getX() + ", " + mal.getBeforelocatoin().getY());
         return GetTargetMal(mal, players);
 
     }
@@ -126,7 +133,7 @@ public class Player extends Mal {
     private void PiggyBack(Mal mal) {
         for (int i = 0; i < mals.size(); i++) {
             if (mal.getBeforelocatoin() != null && isSameLocation(mal, mals.get(i))) {
-                System.out.println("말을 업습니다.");
+//                System.out.println("말을 업습니다.");
                 MakeGroup(mals.get(i));
             }
         }
@@ -138,7 +145,7 @@ public class Player extends Mal {
     }
 
     public boolean GetTargetMal(Mal mal, ArrayList<Player> players) {
-        boolean getmal=false;
+        boolean getmal = false;
 
         for (Player player : players) {
             if (player == this) continue;
@@ -154,5 +161,14 @@ public class Player extends Mal {
         return getmal;
     }
 
+    public boolean havesamegroup(Mal mal) {
+        for (int i = 0; i < numofmal; i++) {
+            if (mal != mals.get(i)) {
+                if (mal.getGroup() == mals.get(i).getGroup()) return true;
+            }
+        }
+
+        return false;
+    }
 
 }

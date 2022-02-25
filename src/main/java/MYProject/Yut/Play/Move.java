@@ -1,7 +1,5 @@
 package MYProject.Yut.Play;
 
-import com.sun.source.tree.BreakTree;
-
 public class Move extends Mal { //말의 이동에 대하여 책임을 지는 객체
 
     public enum direction {
@@ -45,103 +43,12 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
         return location;
     }
 
-//    public Mal ChangeMal(Mal mal, Yut_Grade grade) {
-//
-//        Location t_location = mal.getLocation(); //t_location의 필요성?
-//
-//        int count = grade.getValue(); //윷 값에 따른 이동 횟수
-//
-//        int x = t_location.getX();
-//        int y = t_location.getY();
-//
-//        if(grade == Yut_Grade.백도){ //예외 1 백도 처리
-//            System.out.println("백도로 진입");
-//            if(mal.getBeforelocatoin() != null){ //첫 시작이 아니라면
-//                mal.setLocation(mal.getBeforelocatoin());
-//                return mal;
-//            }
-//            return mal; //첫 시작이라면
-//        }
-//
-//
-//        if ( (x == y) && (x!=30 && y!=30) ) { //오른 대각선 이동
-//            System.out.println("우 대각선 이동!");
-//            for(int i=count; i>0; i--) {
-//                    if(isMalArrive(mal,count)){
-//                            System.out.println("도착!");
-//                            mal.setArrive(true);
-//                            mal.setLocation(t_location);
-//                            return mal;
-//                        }
-//
-//                    mal.setBeforelocatoin(t_location);
-//                    System.out.println("우 대각선으로 이동");
-//                    t_location = DiagonalMove(direction.우대, t_location);
-//                    mal.setLocation(t_location);
-//                }
-//            }
-//        else {
-//            for (int i = count; i > 0; i--) {
-//
-//                x = t_location.getX();
-//                y = t_location.getY();
-//
-//                if(mal.getBeforelocatoin()!=null){ //직선으로 도착했을때
-//                    if(x==30 && y == 30 && count > 0){
-//                        System.out.println("도착!");
-//                        mal.setArrive(true);
-//                        mal.setLocation(t_location);
-//                        return mal;
-//                    }
-//                }
-//
-//                mal.setBeforelocatoin(t_location);
-//
-//                if (mal.isStraight()) { //직선이동을 해야한다면
-//                    if (y == 30 && x != 0) { //위쪽으로 이동
-//                        System.out.println("위로 이동");
-//                        t_location = StraightMove(direction.위, t_location);
-//                    } else if (x == 0 && y != 0) { //좌 우동
-//                        System.out.println("좌로 이동");
-//                        t_location = StraightMove(direction.좌, t_location);
-//                    } else if (y == 0 && x != 30) { //아래 이동
-//                        System.out.println("아래로 이동");
-//                        t_location = StraightMove(direction.아래, t_location);
-//                    } else if (x == 30 && y != 30) {//우 우동
-//                        System.out.println("우로 이동");
-//                        t_location = StraightMove(direction.우, t_location);
-//                    }
-//                } else { //대각선이라면
-//                    if (t_location.getX() == 30 && t_location.getY() == 0) {
-//                        System.out.println("대각선을 해제하고 직선으로 이동합니다");
-//                        System.out.println("우로 이동");
-//                        t_location = StraightMove(direction.우, t_location);
-//                        mal.setStraight(true);
-//                    }
-//                    else if ((x != y) || (x==15 && y==15)) { //왼 대각선 이동
-//                        System.out.println("왼 대각선으로 이동");
-//                        t_location = DiagonalMove(direction.왼대, t_location);
-//                    }
-//                }
-//            }
-//        }
-//
-//         x = t_location.getX();
-//         y = t_location.getY();
-//
-//        mal.setStraight(isStraightMove(x,y)); //대각선으로 움직여야 하는가?
-//
-//        mal.setLocation(t_location);
-//
-//        return mal;
-//    }
-
-
     public Mal ChangeMal(Mal mal, Yut_Grade grade) {
 
         int count = grade.getValue(); //윷 값에 따른 이동 횟수
         int x = mal.getLocation().getX();
         int y = mal.getLocation().getY();
+
 
 
         if (grade == Yut_Grade.백도) { //백도 처리 ->필드에 말이 없다면
@@ -158,6 +65,9 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
                 if (mal.isMalArrive(count)) return mal; //도착검사
 
                 mal.setBeforelocatoin(mal.getLocation());
+                /**
+                 * 비포로케이션 셋팅
+                 */
                 mal.setLocation(DiagonalMove(direction.우대, mal.getLocation()));
             }
         } else { //오른 대각선을 제외한 이동
@@ -169,6 +79,9 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
 
                 if (mal.isMalArrive(count)) return mal; //도착검사
 
+                /**
+                 * 비포로케이션 셋팅
+                 */
                 mal.setBeforelocatoin(mal.getLocation());
 
                 if (mal.isStraight()) { //직선이동을 해야한다면

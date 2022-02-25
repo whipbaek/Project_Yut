@@ -34,8 +34,8 @@ public class Mal implements Mal_I{
     }
 
     @Override
-    public boolean isSameGroup(Mal mal1, Mal mal2){ //말의 그룹이 같은가? (업혀있는가?)
-        if(mal1.getGroup() == mal2.getGroup()) return true;
+    public boolean isSameGroup(Mal mal){ //말의 그룹이 같은가? (업혀있는가?)
+        if(this.getGroup() == mal.getGroup()) return true;
         return false;
     }
 
