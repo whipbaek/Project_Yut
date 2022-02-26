@@ -8,9 +8,9 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
 
     //직선(좌,우,상,하)은 6씩 이동
     public Location StraightMove(direction direction, Location location) {
-        Location location1 = new Location(location.getX(), location.getY());
+        Location location1 = new Location();
 
-        int x = location1.getX();
+        int x = location.getX();
         int y = location.getY();
 
         if (direction == Move.direction.위) {
@@ -29,18 +29,19 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
 
     //대각선일때는 5씩 이동
     public Location DiagonalMove(direction direction, Location location) {
+        Location location1 = new Location();
         int x = location.getX();
         int y = location.getY();
 
         if (direction == Move.direction.왼대) {
-            location.setX(x + 5);
-            location.setY(y - 5);
+            location1.setX(x + 5);
+            location1.setY(y - 5);
         } else if (direction == Move.direction.우대) {
-            location.setX(x + 5);
-            location.setY(y + 5);
+            location1.setX(x + 5);
+            location1.setY(y + 5);
         }
 
-        return location;
+        return location1;
     }
 
     public Mal ChangeMal(Mal mal, Yut_Grade grade) {
@@ -54,6 +55,7 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
         if (grade == Yut_Grade.백도) { //백도 처리 ->필드에 말이 없다면
             if (mal.getBeforelocatoin() != null) { //첫 시작이 아니라면
                 mal.setLocation(mal.getBeforelocatoin());
+                mal.setStraight(isStraightMove(mal.getLocation().getX(), mal.getLocation().getY(), mal)); //대각선으로 움직여야 하는가?
                 return mal;
             }
             return mal; //첫 시작이라면 아무 처리도 하지않음.
@@ -64,10 +66,10 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
             for (int i = count; i > 0; i--) {
                 if (mal.isMalArrive(count)) return mal; //도착검사
 
-                mal.setBeforelocatoin(mal.getLocation());
                 /**
                  * 비포로케이션 셋팅
                  */
+                mal.setBeforelocatoin(mal.getLocation());
                 mal.setLocation(DiagonalMove(direction.우대, mal.getLocation()));
             }
         } else { //오른 대각선을 제외한 이동
@@ -95,6 +97,7 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
                         mal.setLocation(StraightMove(direction.우, mal.getLocation()));
                     }
                 } else { //대각선이라면
+
                     if (x == 30 && y == 0) { //대각선 해제검사
                         mal.setLocation(StraightMove(direction.우, mal.getLocation()));
                         mal.setStraight(true);
@@ -108,7 +111,7 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
 
         x = mal.getLocation().getX();
         y = mal.getLocation().getY();
-
+        System.out.println("beforlocation : " + mal.getBeforelocatoin().getX() + ", " + mal.getBeforelocatoin().getY());
         mal.setStraight(isStraightMove(x, y, mal)); //대각선으로 움직여야 하는가?
 
         return mal;
@@ -122,4 +125,6 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
         }
         return mal.isStraight();
     }
+
+
 }

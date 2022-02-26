@@ -1,11 +1,14 @@
 package MYProject.Yut.Play;
 
+import java.util.Stack;
+
 public class Mal implements Mal_I{
     private Location location; // 말의 현재 위치
     private Location beforelocatoin; //전의 위치 & 말이 출발했는가
     private boolean straight; //직선으로 움직이는가
     private boolean arrive; // 말이 도착했는가
     private int group; // 해당 말이 그룹에 속해있는가(업혀 있는가)
+    private Stack<Location> s;
 
     static public int group_num = 1;
 
@@ -14,6 +17,7 @@ public class Mal implements Mal_I{
         this.straight = true;
         this.arrive = false;
         this.group = 0;
+        s = new Stack<>();
     }
 
     public void initializeMal(Mal mal){ //말이 상대방에게 잡혔을때 관련 정보들으 초기화해주는 메소드
@@ -104,4 +108,18 @@ public class Mal implements Mal_I{
         this.arrive = arrive;
     }
 
+
+    public Location GetStacktop() {
+        Location location = s.peek();
+        s.pop();
+        return location;
+    }
+
+    public Stack<Location> getS() {
+        return s;
+    }
+
+    public void setS(Stack<Location> s) {
+        this.s = s;
+    }
 }

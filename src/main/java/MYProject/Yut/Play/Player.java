@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Player extends Mal {
     private int numofmal;
     private ArrayList<Mal> mals = new ArrayList<>();
+    private int v_numofmal;
     private Move move;
 
     public Player(int numofmal) { //말을 셋팅한다.
         this.numofmal = numofmal;
+        v_numofmal = numofmal;
         MakeMal();
         move = new Move();
     }
@@ -16,7 +18,16 @@ public class Player extends Mal {
     private void MakeMal() { //말을 생성한다.
         for (int i = 0; i < numofmal; i++) {
             mals.add(i, new Mal());
+            mals.get(i).setBeforelocatoin(null);
         }
+    }
+
+    public int getV_numofmal() {
+        return v_numofmal;
+    }
+
+    public void setV_numofmal(int v_numofmal) {
+        this.v_numofmal = v_numofmal;
     }
 
     public int getNumofmal() {
@@ -54,7 +65,7 @@ public class Player extends Mal {
         }
     }
 
-    public boolean isExsitanymalsinfield(){
+    public boolean isExistanymalsinfield(){
         for(Mal mal : mals){
             if(mal.isExistMalInField()) return true;
         }
@@ -111,6 +122,12 @@ public class Player extends Mal {
         return initial_num;
     }
 
+    public void ShowAllmalsGroup(){
+        for(Mal mal : mals){
+            System.out.println(mal.getGroup() + " ");
+        }
+    }
+
 
     public boolean PlayerChangeMal(Mal mal, Yut_Grade yut_grade, ArrayList<Player> players) {
         for (int i = 0; i < numofmal; i++) {
@@ -125,16 +142,16 @@ public class Player extends Mal {
         }
 
         PiggyBack(mal); //이동한 후에 그위치에 같은 말이 있는지 검사한다. (업기 기능)
-        System.out.println("말 beforelocation : " + mal.getBeforelocatoin().getX() + ", " + mal.getBeforelocatoin().getY());
         return GetTargetMal(mal, players);
 
     }
 
     private void PiggyBack(Mal mal) {
-        for (int i = 0; i < mals.size(); i++) {
-            if (mal.getBeforelocatoin() != null && isSameLocation(mal, mals.get(i))) {
+        for (Mal vmal : mals) {
+            if (mal.getBeforelocatoin() != null && vmal.getBeforelocatoin() != null
+                    && !vmal.isArrive() && isSameLocation(mal, vmal) ) {
 //                System.out.println("말을 업습니다.");
-                MakeGroup(mals.get(i));
+                MakeGroup(vmal);
             }
         }
         group_num++;
