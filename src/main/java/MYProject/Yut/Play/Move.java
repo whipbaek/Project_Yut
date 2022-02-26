@@ -8,7 +8,7 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
 
     //직선(좌,우,상,하)은 6씩 이동
     public Location StraightMove(direction direction, Location location) {
-        Location location1 = new Location();
+        Location location1 = new Location(location.getX(),location.getY());
 
         int x = location.getX();
         int y = location.getY();
