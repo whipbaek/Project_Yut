@@ -148,7 +148,7 @@ public class Player extends Mal {
 
     private void PiggyBack(Mal mal) {
         for (Mal vmal : mals) {
-            if (mal.getBeforelocatoin() != null && vmal.getBeforelocatoin() != null
+            if (mal.isStart() && vmal.isStart()
                     && !vmal.isArrive() && isSameLocation(mal, vmal) ) {
 //                System.out.println("말을 업습니다.");
                 MakeGroup(vmal);

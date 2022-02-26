@@ -307,6 +307,8 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
 //이것저것 검사하고 말 위치를 바꾸는 로직 실행
             boolean targetmal = false;
 
+            System.out.println();
+            System.out.println();
             targetmal = nowplayer.PlayerChangeMal(movingmal, yut_grade, players);
             if (targetmal) System.out.println("말을 잡았습니다.");
             repaint();

@@ -2,12 +2,14 @@ package MYProject.Yut.Play;
 
 import java.util.Stack;
 
-public class Mal implements Mal_I{
+public class Mal implements Mal_I {
     private Location location; // 말의 현재 위치
     private Location beforelocatoin; //전의 위치 & 말이 출발했는가
     private boolean straight; //직선으로 움직이는가
     private boolean arrive; // 말이 도착했는가
     private int group; // 해당 말이 그룹에 속해있는가(업혀 있는가)
+    private boolean start;
+    private boolean start2;
     private Stack<Location> s;
 
     static public int group_num = 1;
@@ -17,13 +19,15 @@ public class Mal implements Mal_I{
         this.straight = true;
         this.arrive = false;
         this.group = 0;
+        this.start = false;
+        this.start2 = false;
         s = new Stack<>();
     }
 
-    public void initializeMal(Mal mal){ //말이 상대방에게 잡혔을때 관련 정보들으 초기화해주는 메소드
+    public void initializeMal(Mal mal) { //말이 상대방에게 잡혔을때 관련 정보들으 초기화해주는 메소드
         mal.getLocation().setX(30);
         mal.getLocation().setY(30);
-        
+
         mal.setStraight(true);
         mal.setArrive(false);
 
@@ -32,40 +36,39 @@ public class Mal implements Mal_I{
     }
 
     @Override
-    public boolean isExistMalInField(){ //말이 필드에 존재하는가?
-        if(this.getBeforelocatoin() != null && !this.isArrive()) return true;
+    public boolean isExistMalInField() { //말이 필드에 존재하는가?
+        if (this.start && !this.isArrive()) return true;
         return false;
     }
 
     @Override
-    public boolean isSameGroup(Mal mal){ //말의 그룹이 같은가? (업혀있는가?)
-        if(this.getGroup() == mal.getGroup()) return true;
+    public boolean isSameGroup(Mal mal) { //말의 그룹이 같은가? (업혀있는가?)
+        if (this.getGroup() == mal.getGroup()) return true;
         return false;
     }
 
     @Override
-    public boolean isSameLocation (Mal mal1, Mal mal2){ //두 말의 위치가 같은가? (잡기시에 사용)
-        if(isSamePosition(mal1.getLocation(),mal2.getLocation())) return true;
+    public boolean isSameLocation(Mal mal1, Mal mal2) { //두 말의 위치가 같은가? (잡기시에 사용)
+        if (isSamePosition(mal1.getLocation(), mal2.getLocation())) return true;
         return false;
     }
 
     @Override
-    public boolean isSamePosition(Location location1, Location location2){ //두 location이 같은가?
-        if(location1.getX() == location2.getX() && location1.getY() == location2.getY()) return true;
+    public boolean isSamePosition(Location location1, Location location2) { //두 location이 같은가?
+        if (location1.getX() == location2.getX() && location1.getY() == location2.getY()) return true;
         return false;
     }
 
     @Override
-    public boolean isMalArrive(int count){
-        if(this.getBeforelocatoin() != null &&
-           this.getLocation().getX()==30 && this.getLocation().getY()==30 &&
-           count > 0) {
+    public boolean isMalArrive(int count) {
+        if (this.isStart2() &&
+                this.getLocation().getX() == 30 && this.getLocation().getY() == 30 &&
+                count > 0) {
             this.setArrive(true);
             return true;
         }
         return false;
     }
-
 
 
     public Location getLocation() {
@@ -121,5 +124,21 @@ public class Mal implements Mal_I{
 
     public void setS(Stack<Location> s) {
         this.s = s;
+    }
+
+    public boolean isStart() {
+        return start;
+    }
+
+    public void setStart(boolean start) {
+        this.start = start;
+    }
+
+    public boolean isStart2() {
+        return start2;
+    }
+
+    public void setStart2(boolean start2) {
+        this.start2 = start2;
     }
 }
