@@ -66,7 +66,6 @@ public class WholeGameGUI_FirstPage extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int numofplayer=0;
         int numofmal=0;
-        String msg = "";
 
         if (cb1.isSelected()) {
             numofplayer = 2;

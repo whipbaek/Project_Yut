@@ -482,35 +482,40 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
     public Location mappingLocation(int x, int y) {
         Location location = null;
 
-        if (x == 30 && y == 30) location = new Location(395, 380);
-        else if (x == 24 && y == 30) location = new Location(410, 330);
-        else if (x == 18 && y == 30) location = new Location(410, 275);
-        else if (x == 12 && y == 30) location = new Location(410, 220);
-        else if (x == 6 && y == 30) location = new Location(410, 165);
-        else if (x == 0 && y == 30) location = new Location(395, 75);
-        else if (x == 0 && y == 24) location = new Location(330, 100);
-        else if (x == 0 && y == 18) location = new Location(275, 100);
-        else if (x == 0 && y == 12) location = new Location(220, 100);
-        else if (x == 0 && y == 6) location = new Location(165, 100);
-        else if (x == 0 && y == 0) location = new Location(75, 75);
-        else if (x == 6 && y == 0) location = new Location(100, 165);
-        else if (x == 12 && y == 0) location = new Location(100, 220);
-        else if (x == 18 && y == 0) location = new Location(100, 275);
-        else if (x == 24 && y == 0) location = new Location(100, 330);
-        else if (x == 30 && y == 0) location = new Location(75, 380);
-        else if (x == 30 && y == 6) location = new Location(165, 410);
-        else if (x == 30 && y == 12) location = new Location(220, 410);
-        else if (x == 30 && y == 18) location = new Location(275, 410);
-        else if (x == 30 && y == 24) location = new Location(330, 410);
-        else if (x == 5 && y == 25) location = new Location(355, 155);
-        else if (x == 10 && y == 20) location = new Location(315, 190);
-        else if (x == 15 && y == 15) location = new Location(235, 225);
-        else if (x == 20 && y == 10) location = new Location(195, 315);
-        else if (x == 25 && y == 5) location = new Location(155, 355);
-        else if (x == 5 && y == 5) location = new Location(155, 155);
-        else if (x == 10 && y == 10) location = new Location(195, 195);
-        else if (x == 20 && y == 20) location = new Location(315, 315);
-        else if (x == 25 && y == 25) location = new Location(355, 355);
+        if (x == 30 && y == 30) location = new Location(415, 415);
+        else if (x == 24 && y == 30) location = new Location(415, 335);
+        else if (x == 18 && y == 30) location = new Location(415, 280);
+        else if (x == 12 && y == 30) location = new Location(415, 225);
+        else if (x == 6 && y == 30) location = new Location(415, 170);
+        else if (x == 0 && y == 30) location = new Location(415, 105);
+
+        else if (x == 0 && y == 24) location = new Location(335, 105);
+        else if (x == 0 && y == 18) location = new Location(280, 105);
+        else if (x == 0 && y == 12) location = new Location(225, 105);
+        else if (x == 0 && y == 6) location = new Location(170, 105);
+        else if (x == 0 && y == 0) location = new Location(105, 105);
+
+        else if (x == 6 && y == 0) location = new Location(105, 170);
+        else if (x == 12 && y == 0) location = new Location(105, 225);
+        else if (x == 18 && y == 0) location = new Location(105, 280);
+        else if (x == 24 && y == 0) location = new Location(105, 335);
+        else if (x == 30 && y == 0) location = new Location(105, 415);
+
+        else if (x == 30 && y == 6) location = new Location(170, 415);
+        else if (x == 30 && y == 12) location = new Location(225, 415);
+        else if (x == 30 && y == 18) location = new Location(280, 415);
+        else if (x == 30 && y == 24) location = new Location(335, 415);
+
+        else if (x == 5 && y == 25) location = new Location(360, 160);
+        else if (x == 10 && y == 20) location = new Location(320, 200);
+        else if (x == 15 && y == 15) location = new Location(260, 255);
+        else if (x == 20 && y == 10) location = new Location(200, 320);
+        else if (x == 25 && y == 5) location = new Location(160, 360);
+
+        else if (x == 5 && y == 5) location = new Location(160, 160);
+        else if (x == 10 && y == 10) location = new Location(200, 200);
+        else if (x == 20 && y == 20) location = new Location(320, 320);
+        else if (x == 25 && y == 25) location = new Location(360, 360);
 
         return location;
     }
