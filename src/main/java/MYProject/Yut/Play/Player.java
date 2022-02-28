@@ -172,6 +172,8 @@ public class Player extends Mal {
                     initializeMal(targetmal);
                     System.out.println(player + "P의 " + targetmal + " 말을 잡았습니다.");
                     getmal = true;
+                    targetmal.setStart(false);
+                    targetmal.setStart2(false);
                 }
             }
         }
