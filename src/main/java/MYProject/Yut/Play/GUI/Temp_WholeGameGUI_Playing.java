@@ -36,10 +36,10 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
         setTitle("Project Yut Playing1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        l1 = new JLabel("0P");
-        l2 = new JLabel("1P");
-        l3 = new JLabel("2P");
-        l4 = new JLabel("3P");
+        l1 = new JLabel("1P");
+        l2 = new JLabel("2P");
+        l3 = new JLabel("3P");
+        l4 = new JLabel("4P");
 
         p1m = new JLabel("(" + numofmal + "개)");
         p2m = new JLabel("(" + numofmal + "개)");
@@ -55,7 +55,8 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
         m2 = new JButton("2");
         m3 = new JButton("3");
         m4 = new JButton("4");
-
+/*
+임의로 윷 값을 넣고싶을때 추가하는 로직
         bbackdo = new JButton("백도");
         bdoe = new JButton("도");
         bgae = new JButton("개");
@@ -69,11 +70,13 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
         bgirl.setBounds(800, 320, 50, 60);
         byut.setBounds(800, 400, 50, 60);
         bmoe.setBounds(800, 480, 50, 60);
-
+*/
         restart = new JButton("다시하기");
         restart.setBounds(600, 480, 170, 60);
         restart.addActionListener(new action_restart());
 
+/*
+임의로 윷 값을 넣고싶을때 추가하는 로직
         add(bbackdo);
         add(bdoe);
         add(bgae);
@@ -87,12 +90,13 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
         bgirl.addActionListener(new custom_malclick());
         byut.addActionListener(new custom_malclick());
         bmoe.addActionListener(new custom_malclick());
+*/
 
         Random random = new Random();
         nowplayeridx = random.nextInt(numofplayer); //첫 순서결정
-        System.out.println("nowplayeridx : " + (nowplayeridx));
+  //      System.out.println("nowplayeridx : " + (nowplayeridx));
         whoisplaying = new JLabel();
-        state = new JLabel("첫번째 선수는 " + (nowplayeridx) + "Player 입니다. 윷을 던지세요.");
+        state = new JLabel("첫번째 선수는 " + (nowplayeridx + 1) + "Player 입니다. 윷을 던지세요.");
         add(state);
         add(whoisplaying);
 
@@ -170,9 +174,9 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
                 yut_grade = Yut_Grade.백도;
                 if (players.get(nowplayeridx).getNumOfFieldMals() == 0) {
                     nowplayeridx = GetNextPlayer(nowplayeridx);
-                    whoisplaying.setText("현재 플레이어 : " + nowplayeridx + "Player");
+                    whoisplaying.setText("현재 플레이어 : " + (nowplayeridx + 1) + "Player");
                     state.setText("<HTML>결과는 백도 입니다. 움직일 말이 없습니다.<br>"
-                            + nowplayeridx + "Player의 차례입니다. 윷을 던져주세요. </HTML>");
+                            + (nowplayeridx + 1) + "Player의 차례입니다. 윷을 던져주세요. </HTML>");
                 } else {
                     state.setText("결과는 백도 입니다. 움직이실 말을 선택해주세요");
                 }
@@ -207,7 +211,7 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            whoisplaying.setText("현재 플레이어 : " + nowplayeridx + "Player");
+            whoisplaying.setText("현재 플레이어 : " + (nowplayeridx+1) + "Player");
 
             yut_grade = yut.rollingYut();
             if (yut_grade == Yut_Grade.도) {
@@ -223,9 +227,9 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
             } else if (yut_grade == Yut_Grade.백도) {
                 if (players.get(nowplayeridx).getNumOfFieldMals() == 0) {
                     nowplayeridx = GetNextPlayer(nowplayeridx);
-                    whoisplaying.setText("현재 플레이어 : " + nowplayeridx + "Player");
+                    whoisplaying.setText("현재 플레이어 : " + (nowplayeridx+1) + "Player");
                     state.setText("<HTML>결과는 백도 입니다. 움직일 말이 없습니다.<br>"
-                            + nowplayeridx + "Player의 차례입니다. 윷을 던져주세요. </HTML>");
+                            + (nowplayeridx+1) + "Player의 차례입니다. 윷을 던져주세요. </HTML>");
                 } else {
                     state.setText("결과는 백도 입니다. 움직이실 말을 선택해주세요");
                 }
@@ -326,10 +330,10 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
             if (!targetmal && (yut_grade != Yut_Grade.모) && (yut_grade != Yut_Grade.윷) && nowplayer.getV_numofmal() != 0) {
                 if (nowplayeridx == numofplayer - 1) {
                     nowplayeridx = 0;
-                    state.setText((nowplayeridx) + "Player의 차례입니다. 윷을 던지세요");
+                    state.setText((nowplayeridx + 1) + "Player의 차례입니다. 윷을 던지세요");
                 } else {
                     nowplayeridx++;
-                    state.setText((nowplayeridx) + "Player의 차례입니다. 윷을 던지세요");
+                    state.setText((nowplayeridx + 1) + "Player의 차례입니다. 윷을 던지세요");
                 }
             } else if (targetmal) {
                 state.setText("말을 잡았습니다. 윷을 한 번 더 던지세요");
@@ -350,7 +354,7 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
 
             System.out.println("말 남은 개수 : " + nowplayer.getV_numofmal());
             if (nowplayer.getV_numofmal() == 0) {
-                state.setText("<HTML>우승자는 " + nowplayeridx + "Player 입니다! " +
+                state.setText("<HTML>우승자는 " + (nowplayeridx+1) + "Player 입니다! " +
                         "<br> 게임이 끝났습니다. </HTML>");
                 rolling.setEnabled(false);
                 add(restart);
@@ -358,7 +362,7 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
             }
 
 
-            whoisplaying.setText("현재 플레이어 : " + nowplayeridx + "Player");
+            whoisplaying.setText("현재 플레이어 : " + (nowplayeridx+1) + "Player");
 
         }
     }
@@ -381,7 +385,7 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
         }
 
         if (numofplayer > 3) {
-            g.setColor(Color.CYAN);
+            g.setColor(Color.BLACK);
             g.fillOval(600, 220, 25, 25);
         }
 
@@ -444,7 +448,7 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
             if (i == 0) g.setColor(Color.MAGENTA);
             else if (i == 1) g.setColor(Color.ORANGE);
             else if (i == 2) g.setColor(Color.PINK);
-            else g.setColor(Color.CYAN);
+            else g.setColor(Color.black);
 
             for (int j = 0; j < numofmal; j++) {
                 Mal Movingmal = players.get(i).getMals().get(j);
