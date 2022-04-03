@@ -170,7 +170,6 @@ public class Player extends Mal {
             for (Mal targetmal : player.getMals()) {
                 if (isSameLocation(mal, targetmal) && targetmal.isExistMalInField()) {
                     initializeMal(targetmal);
-                    System.out.println(player + "P의 " + targetmal + " 말을 잡았습니다.");
                     getmal = true;
                     targetmal.setStart(false);
                     targetmal.setStart2(false);

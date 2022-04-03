@@ -311,17 +311,9 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
 //이것저것 검사하고 말 위치를 바꾸는 로직 실행
             boolean targetmal = false;
 
-            System.out.println();
-            System.out.println();
             targetmal = nowplayer.PlayerChangeMal(movingmal, yut_grade, players);
-            if (targetmal) System.out.println("말을 잡았습니다.");
             repaint();
 
-            System.out.println("movingmal = " + mals.indexOf(movingmal));
-            System.out.println("nowplayeridx = " + nowplayeridx);
-            nowplayer.ShowAllmalsGroup();
-            nowplayer.ShowAllMalsInfo();
-            nowplayer.ShowAllMalLocation();
 
             if (movingmal.isArrive()) {
                 nowplayer.setV_numofmal(nowplayer.getV_numofmal() - nowplayer.numOfSameGroup(movingmal)); //도착했으면 해당 플레이어의 말 수를 제외함
@@ -352,7 +344,6 @@ public class Temp_WholeGameGUI_Playing extends JFrame {
                 p4m.setText("(" + players.get(3).getV_numofmal() + "개)");
 
 
-            System.out.println("말 남은 개수 : " + nowplayer.getV_numofmal());
             if (nowplayer.getV_numofmal() == 0) {
                 state.setText("<HTML>우승자는 " + (nowplayeridx+1) + "Player 입니다! " +
                         "<br> 게임이 끝났습니다. </HTML>");

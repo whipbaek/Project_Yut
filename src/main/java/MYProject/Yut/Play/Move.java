@@ -36,11 +36,9 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
         if (direction == Move.direction.왼대) {
             location1.setX(x + 5);
             location1.setY(y - 5);
-            System.out.println("왼대각선 이동");
         } else if (direction == Move.direction.우대) {
             location1.setX(x + 5);
             location1.setY(y + 5);
-            System.out.println("우대각선 이동");
         }
 
         return location1;
@@ -58,13 +56,9 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
 
                 mal.setLocation(mal.GetStacktop());
                 mal.setStraight(isStraightMove(mal.getLocation().getX(), mal.getLocation().getY(), mal)); //대각선으로 움직여야 하는가?
-                System.out.println();
-                System.out.println("스택의 사이즈 : " + mal.getS().size());
-                System.out.println();
 
                 return mal;
             }
-            System.out.println("스택이 비어있습니다.");
             return mal; //첫 시작이라면 아무 처리도 하지않음.
         }
 
@@ -112,7 +106,6 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
                         mal.setLocation(StraightMove(direction.우, mal.getLocation()));
                         mal.setStraight(true);
                     } else if ((x != y) || (x == 15 && y == 15)) { //왼 대각선
-                        System.out.println("왼대각선입니다");
                         mal.setLocation(DiagonalMove(direction.왼대, mal.getLocation()));
                     }
                 }
@@ -132,7 +125,6 @@ public class Move extends Mal { //말의 이동에 대하여 책임을 지는 �
         if ((x == 0 && y == 30) || (x == 0 && y == 0) || (x == 15 && y == 15) ||
             (x == 5 && y == 25) || (x == 10 && y == 20) || (x == 20 && y == 10) || (x == 25 && y == 5) ||
             (x == 5 && y == 5) || (x == 10 && y == 10) || (x == 20 && y == 20) || (x == 25 && y == 25)) {
-            System.out.println("대각선으로 이동해야합니다. 좌표[" + x + "," + y + "]");
             return false;
         }
         return true;
